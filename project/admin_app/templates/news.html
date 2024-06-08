@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}News{% endblock %}
+
+{% block main %}
+    {% if get_flashed_messages() %}
+        <div class="alert alert-primary" role="alert">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+    {% endif %}
+
+    <!-- News articles -->
+    <div class="container mt-5">
+        <h2>Latest News </h2>
+        <div class="container d-flex justify-content-between" style="margin-left: 200px;">
+            <ul>
+                {% for article in articles %}
+                    <li>
+                        <h3><a href="{{ url_for('show_article', article_id=article['id']) }}">{{ article['title'] }}</a></h3>
+                        {% if article['photo_url'] %}
+                            <!-- Display the photo if available -->
+                            <img src="{{ article.photo }}" alt="Article Photo" style="max-width: 100%; height: auto;">
+                        {% else %}
+                            <!-- Provide a placeholder image if no photo is available -->
+                            <img src="/static/crmlogo.jpg" alt="Placeholder Image" style="max-width: 100%; height: auto;">
+                        {% endif %}
+                        <p><strong>Published on: {{ article['timestamp'] }}</strong></p>
+                        <p><strong>From: {{ article['reporter'] }}, {{ article['location'] }}</strong></p>
+                        <div class="news-content" style="white-space: pre-line;">
+                            <p>{{ article['content'] }}</p>
+                        </div>
+                        <div>
+                            <a href="{{ url_for('edit_article', article_id=article['id']) }}" style="font-weight: bold; font-size: larger;">Edit Article</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

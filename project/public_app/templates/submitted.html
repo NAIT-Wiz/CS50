@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Incident Report Submitted
+{% endblock %}
+
+{% block main %}
+<div class="container mt-5"> <!-- Adjust margin top to create space below the navigation bar -->
+    <div class="alert alert-success" role="alert">
+        Incident report submitted successfully. Your reference number is: {{ reference_number }}
+    </div>
+    <p><a href="/">Back to Home</a></p>
+</div>
+{% endblock %}

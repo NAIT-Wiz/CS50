@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin Dashboard
+{% endblock %}
+
+{% block main %}
+    <h1>Welcome to the Admin Dashboard</h1>
+
+    <h2>Audit Logs</h2>
+    <p>View recent activities and changes made within the system:</p>
+    <div id="audit-logs">
+        <a href="/audit_trail" style="font-size: larger; font-weight: bold;">Activity Logs</a>
+        <!-- Audit logs will be dynamically populated here -->
+    </div>
+
+    <h2>Support Tools</h2>
+    <p>Tech support for with users:</p>
+    <div id="communication-tools">
+    <ul>
+        <li><a href="/messages" style="font-size: larger; font-weight: bold;">Support Feedback</a></li>
+    </ul>
+        <!-- Communication tools content -->
+    </div>
+
+    <h2>User Management</h2>
+    <p>Manage user accounts and permissions:</p>
+    <div id="user-management">
+        <ul>
+            <li><a href="/create_user" style="font-size: larger; font-weight: bold;">Register</a></li>
+        </ul>
+        <ul>
+            <li><a href="/manage_users" style="font-size: larger; font-weight: bold;">Manage Users</a></li>
+        </ul>
+        <!-- User management content -->
+    </div>
+{% endblock %}
+
+

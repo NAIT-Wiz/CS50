@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}Audit Trail{% endblock %}
+
+{% block main %}
+<div class="container mt-5">
+    <h2>Audit Trail</h2>
+    <table class="table" style="margin-left: 90px;">
+        <thead>
+            <tr>
+                <th style="text-align:center;">Timestamp</th>
+                <th style="text-align:center;">Username</th>
+                <th style="text-align:center;">User ID</th>
+                <th style="text-align:center;">Action Type</th>
+                <th style="text-align:center;">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in audit_trail %}
+            <tr>
+                <td>{{ record.timestamp }}</td>
+                <td>{{ record.username }}</td>
+                <td>{{ record.user_id }}</td>
+                <td>{{ record.action_type }}</td>
+
+                <td>{{ record.details }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}
+    Manage Users
+{% endblock %}
+{% block main %}
+    <h1>Manage Users</h1>
+
+    <table style="margin-left: 200px;">
+        <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Update Status</th>
+            <th>Change Role</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.full_name }}</td>
+                <td>{{ user.role_name }}</td> <!-- Display role name instead of role ID -->
+                <td>{{ user.status }}</td>
+                <td>
+                    <!-- Form for suspending or activating user account -->
+                    <form action="/suspend_account/{{ user.id }}" method="post">
+                        <select name="status" class="form-control mx-auto w-auto" style="width: 180px;">
+                            <option value="active"><strong>Active</strong></option>
+                            <option value="inactive"><strong>Inactive</strong></option>
+                        </select>
+                        <button class="btn btn-danger" type="submit">Update Status</button>
+                    </form>
+                    </td>
+                    <td>
+                    <!-- Form for changing user role -->
+                    <form action="/change_role/{{ user.id }}" method="post">
+                        <select name="role_id" class="form-control mx-auto w-auto" style="width: 180px;">
+                            {% for role in roles %}
+                                <option value="{{ role.id }}"><strong>{{ role.name }}</strong></option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn-success" type="submit">Change Role</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

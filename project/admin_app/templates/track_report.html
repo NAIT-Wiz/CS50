@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Track Report{% endblock %}
+
+{% block main %}
+{% if get_flashed_messages() %}
+<div class="alert alert-primary" role="alert">
+    {{ get_flashed_messages() | join(" ") }}
+</div>
+{% endif %}
+    <h1>Track Report</h1>
+    {% if report %}
+        <h2>Report Details</h2>
+        <p><strong>Reference Number:</strong> {{ report.reference_number }}</p>
+        <p><strong>Category:</strong> {{ report.category }}</p>
+        <p><strong>Description:</strong> {{ report.description }}</p>
+        <p><strong>Location:</strong> {{ report.location }}</p>
+        <p><strong>Anonymous:</strong> {% if report.anonymous %}Yes{% else %}No{% endif %}</p>
+        <!-- Add more details as needed -->
+        <p><a href="/">Back to Track Report</a></p>
+    {% else %}
+        <form action="/track_report" method="GET">
+            <label for="reference_number">Enter Reference Number:</label>
+            <input type="text" id="reference_number" name="reference_number" required placeholder="Reference Number">
+            <button type="submit" class="btn btn-primary">Track</button>
+        </form>
+    {% endif %}
+{% endblock %}

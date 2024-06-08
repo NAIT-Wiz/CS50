@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    View Report
+{% endblock %}
+
+{% block main %}
+{% if get_flashed_messages() %}
+<div class="alert alert-primary" role="alert">
+    {{ get_flashed_messages() | join(" ") }}
+</div>
+{% endif %}
+
+<div class="container underline">
+  <h1>Report Details</h1>
+
+  <form action="{{ url_for('view_report', report_id=report_id) }}" method="post">
+    <input type="hidden" name="action" value="open">
+    <button type="submit" class="btn btn-success">Mark as Opened</button>
+</form>
+  <div>
+      <h2></h2>
+      <p><strong>Category:</strong> {{ report.category }} : {{ report.location }} : {{ report.timestamp }}</p>
+
+      <p><strong>Description:</strong></p>
+      <div class="news-content" style="white-space: pre-line;"></div>
+      <p style="text-align: justify;">{{ report.description }}</p>
+    </div>
+      <!-- Add more details as needed -->
+  </div>
+  <div class="report-details">
+    <div class="section">
+        <h3></h3>
+        <div class="info">
+            <p><strong>Status:</strong> {{ report.status }}</p>
+        </div>
+        <div  class="underline">
+            <a href="{{ url_for('status', report_id=report_id) }}" class="btn btn-primary">Update Status</a>
+        </div>
+        <div class="info">
+            <p style="font-size: larger;"><strong>Case Updates:</strong></p>
+            <ul>
+                {% for note in notes %}
+                <li class="note-item">{{ note.note }} - <span style="font-size: smaller;" text-decoration: underline;">{{ note.note_timestamp }}</span></li>
+                {% endfor %}
+            </ul>
+          </div>
+        <div  class="underline">
+            <a href="{{ url_for('add_notes', report_id=report_id) }}"class="btn btn-primary">Update Case </a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3></h3>
+        <div class="info">
+            <p><strong>Priority:</strong> {{ report.priority }}</p>
+            <p><strong>Assigned To:</strong> {{ report.assigned_to }}</p>
+        </div>
+        <div  class="underline">
+            <a href="{{ url_for('process', report_id=report_id) }}" class="btn btn-primary">Assign</a>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function openProcessPage(reportId) {
+    // Assuming the process page URL is "/report/{reportId}/process"
+    var processUrl = "/report/" + reportId + "/process";
+    window.location.href = processUrl;
+}
+</script>
+
+{% endblock %}

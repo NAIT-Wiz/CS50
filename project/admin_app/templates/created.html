@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+User Created
+{% endblock %}
+
+{% block main %}
+<div class="container mt-5"> <!-- Adjust margin top to create space below the navigation bar -->
+    <div class="alert alert-success" role="alert">
+        <p>Account created successfully! Your username is: {{force_no}}</p>
+    </div>
+    <p><a href="/">Back to Home</a></p>
+    <p><a href="{{ url_for('login') }}">Login</a></p>
+</div>
+{% endblock %}

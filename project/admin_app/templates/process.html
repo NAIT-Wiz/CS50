@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}Process Report{% endblock %}
+
+{% block main %}
+{% if get_flashed_messages() %}
+<div class="alert alert-primary" role="alert">
+    {{ get_flashed_messages() | join(" ") }}
+</div>
+{% endif %}
+<div class="container">
+    <h1>Process Report</h1>
+
+    <!-- Report ID -->
+    <p>Report ID: {{ report_id }}</p>
+
+
+<!-- Assign Form -->
+<form action="/report/{{ report_id }}/process" method="POST">
+    <div class="mb-3 d-flex justify-content-center">
+        <label for="assigned_to" class="form-label"></label>
+        <select class="form-select form-select-md" id="assigned_to" name="assigned_to" autofocus style="width: 180px;" required>
+            <option value="">Select</option>
+            <option value="1">Admin</option>
+            <option value="5">Analyst</option>
+            <option value="6">Dispatcher</option>
+            <option value="9">HR/Admin</option>
+            <option value="4">Investigator</option>
+            <option value="10">Legal Advisor</option>
+            <option value="2">Officer</option>
+            <option value="8">Technical Support</option>
+            <option value="7">Trainer</option>
+            <option value="3">Supervisor</option>
+        </select>
+    </div>
+
+    <form action="/report/{{ report_id }}/process" method="POST">
+        <div class="mb-3 d-flex justify-content-center">
+            <label for="priority" class="form-label"></label>
+            <select class="form-select form-select-md" id="priority" name="priority" autofocus style="width: 180px;"   required>
+                <option value="">Select Priority</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Assign Report</button>
+    </form>
+</div>
+{% endblock %}
+<select id="symbol" autofocus name="symbol" class="form-select form-select-md" style="width: 180px;"></select>

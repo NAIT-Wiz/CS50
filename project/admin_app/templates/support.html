@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Support{% endblock %}
+
+{% block main %}
+    <h1>Support</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="/support" method="post">
+        <!-- Hidden input field to include the sender's username -->
+        <input type="hidden" id="sender_username" name="sender_username" value="{{ sender_username }}">
+
+        <label for="message_text">Message:</label><br>
+        <textarea id="message_text" name="message_text" class="form-control" rows="4" placeholder="Enter message"  style="margin-left: 90px;" required></textarea><br>
+
+        <input type="submit" value="Send" class="btn btn-primary">
+    </form>
+{% endblock %}
+

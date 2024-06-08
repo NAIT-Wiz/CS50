@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}
+    Assign Role
+{% endblock %}
+{% block content %}
+    <h1>Assign Role</h1>
+    <form action="/assign_role" method="POST">
+        {% csrf_token %}
+        <label for="user_id">User ID:</label>
+        <input type="text" name="user_id" id="user_id" required><br><br>
+
+        <label for="role_id">Role ID:</label>
+        <input type="text" name="role_id" id="role_id" required><br><br>
+
+        <button type="submit">Assign Role</button>
+    </form>
+
+    <h2>Users List</h2>
+    <ul>
+        {% for user in users %}
+            <li>{{ user.username }} - ID: {{ user.id }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Roles List</h2>
+    <ul>
+        {% for role in roles %}
+            <li>{{ role.role_name }} - ID: {{ role.role_id }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

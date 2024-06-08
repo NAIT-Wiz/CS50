@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Post News
+{% endblock %}
+
+{% block main %}
+{% if get_flashed_messages() %}
+<div class="alert alert-primary" role="alert">
+    {{ get_flashed_messages() | join(" ") }}
+</div>
+{% endif %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2"> <!-- Adjust column width and offset as needed -->
+            <!-- News Posting Form -->
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Post News and Notices</h2>
+                    <form action="{{ url_for('post_news') }}" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3 d-flex justify-content-center">
+                            <label for="location" class="form-label"></label>
+                            <input type="text" class="form-control" id="location" name="location" autofocus style="width: 180px;" placeholder="Location"  required>
+                        </div>
+                        <div class="mb-3 d-flex justify-content-center">
+                            <label for="reporter" class="form-label"></label>
+                            <input type="text" class="form-control" id="reporter" name="reporter" value="Info Desk" autofocus style="width: 180px;" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Full Headline" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <textarea class="form-control" id="content" name="content" rows="5" placeholder="Write Content Here"required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Photo (optional)</label>
+                            <input type="file" class="form-control" id="photo" name="photo" multiple>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Post News</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

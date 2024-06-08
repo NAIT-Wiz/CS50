@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // TODO: Add code to check answers to questions
+        </script>
+    </head>
+    <body>
+    <div class="header">
+        <h1>Trivia!</h1>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Part 1: Multiple Choice </h2>
+            <hr>
+            <h3>What is the capital of France?</h3>
+            <button onclick="checkAnswer(this, 'incorrect')">London</button>
+            <button onclick="checkAnswer(this, 'correct')">Paris</button>
+            <button onclick="checkAnswer(this, 'incorrect')">Berlin</button>
+            <p id="part1-feedback"></p>
+        </div>
+
+        <div class="section">
+            <h2>Part 2: Free Response</h2>
+            <hr>
+            <h3>What is the color of the sky?</h3>
+            <input type="text" id="answerInput">
+            <button onclick="checkFreeResponse()">Confirm</button>
+            <p id="part2-feedback"></p>
+        </div>
+        <div class="section">
+            <h2>Additional Trivia Questions</h2>
+            <hr>
+        <div>
+            <h3>Who painted the Mona Lisa?</h3>
+            <button onclick="checkAnswer(this, 'incorrect')">Pablo Picasso</button>
+            <button onclick="checkAnswer(this, 'incorrect')">Vincent van Gogh</button>
+            <button onclick="checkAnswer(this, 'correct')">Leonardo da Vinci</button>
+            <p id="part3-feedback"></p>
+        </div>
+        <div>
+            <h3>What is the largest planet in our solar system?</h3>
+            <button onclick="checkAnswer(this, 'correct')">Jupiter</button>
+            <button onclick="checkAnswer(this, 'incorrect')">Mars</button>
+            <button onclick="checkAnswer(this, 'incorrect')">Earth</button>
+            <p id="part4-feedback"></p>
+        </div>
+        <div>
+            <h3>Who wrote "Hamlet"?</h3>
+            <button onclick="checkAnswer(this, 'incorrect')">Charles Dickens</button>
+            <button onclick="checkAnswer(this, 'correct')">William Shakespeare</button>
+            <button onclick="checkAnswer(this, 'incorrect')">Jane Austen</button>
+            <p id="part5-feedback"></p>
+        </div>
+        </div>
+    </body>
+
+    <script>
+        function checkAnswer(button, correctness) {
+          var feedback = document.getElementById("part1-feedback");
+          if (correctness === 'correct') {
+            button.style.backgroundColor = 'green';
+            feedback.textContent = 'Correct!';
+          } else {
+            button.style.backgroundColor = 'red';
+            feedback.textContent = 'Incorrect';
+          }
+        }
+
+        function checkFreeResponse() {
+          var userInput = document.getElementById("answerInput").value.toLowerCase();
+          var feedback = document.getElementById("part2-feedback");
+          if (userInput === 'blue') {
+            document.getElementById("answerInput").style.backgroundColor = 'green';
+            feedback.textContent = 'Correct!';
+          } else {
+            document.getElementById("answerInput").style.backgroundColor = 'red';
+            feedback.textContent = 'Incorrect';
+          }
+        }
+      </script>
+      </body>
+      </html>
+

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Transaction History
+{% endblock %}
+
+{% block main %}
+<main class="container py-5">
+    <h1 class="mb-4">Transaction History</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Price</th>
+                <th>Shares</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction["symbol"] }}</td>
+                <td>{{ transaction["price"]|usd }}</td>
+                <td>{{ (transaction["shares"]) if transaction["transaction_type"] == "buy" else -transaction["shares"] }}</td>
+                {% set datetime_obj = transaction["date"] | string_to_datetime %}
+                <td>{{ datetime_obj.strftime("%Y-%m-%d %H:%M:%S") }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

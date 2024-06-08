@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    View Report
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h1>Report Details</h1>
+        <!-- Your report details content goes here -->
+        <form action="/status/{{ report_id }}" method="POST"> <!-- Open the form here -->
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="status" class="form-label"></label>
+                <select class="form-select form-select-md" id="status" name="status" autofocus style="width: 180px;">
+                    <option value="Pending">Pending</option>
+                    <option value="Aprehended">Aprehended</option>
+                    <option value="In Courts">In Courts</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+            <div class="action">
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </div>
+        </form> <!-- Close the form here -->
+    </div>
+{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    {% if get_flashed_messages() %}
+        <div class="alert alert-primary" role="alert">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+    {% endif %}
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <form action="/login" method="post">
+            <div class="mb-2">
+                <input autocomplete="off" autofocus class="form-control" name="username" id="username" placeholder="Username" type="text">
+            </div>
+            <div class="mb-2">
+                <input class="form-control" name="password" id="password" placeholder="Password" type="password">
+            </div>
+            <button class="btn btn-primary" type="submit">Log In</button>
+        </form>
+    </div>
+{% endblock %}

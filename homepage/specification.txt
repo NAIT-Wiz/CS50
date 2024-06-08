@@ -1,0 +1,21 @@
+HTML Tags Used:
+1. <html>
+2. <head>
+3. <body>
+4. <title>
+5. <h1>
+6. <p>
+7. <ul>
+8. <li>
+9. <a>
+
+CSS Properties Used:
+1. font-family
+2. color
+3. text-decoration
+
+JavaScript Feature:
+I used JavaScript to add interactivity to the navigation links by making them change color on hover.
+
+Bootstrap Feature:
+I used Bootstrap to make the website responsive and enhance its visual appearance.

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom CSS -->
+    <link href="/static/styles.css" rel="stylesheet">
+    <!-- Favicon -->
+    <link href="/static/ato.ico" rel="icon">
+    <title> A    T       O    : {% block title %}{% endblock %}</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/" style="font-size: 42px;">
+            <span style="color: red;">A</span>
+            <span style="color: green;">T</span>
+            <span style="color: gold;">O</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            {% if session["user_id"] %}
+                <ul class="navbar-nav me-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/search">Search</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/report_details">Reports</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/headlines">Latest News</a></li>
+                    {% if 'AD' in session['username'] %}
+                    <li class="nav-item"><a class="nav-link" href="/dashboard">Admin dashboard</a></li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ms-auto mt-2">
+                    <li class="nav-item"><span class="nav-link" style="color: gold;"><strong>Logged in as {{ session["username"] }} ({{ session["full_name"] }})</strong></span></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/change_password">Change password</a></li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav ms-auto mt-2">
+                    <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+{% set messages = get_flashed_messages() %}
+{% if messages %}
+    <header>
+        <div class="alert alert-primary mb-0 text-center" role="alert">
+            {{ messages | join(" ") }}
+        </div>
+    </header>
+{% endif %}
+
+<div class="background-image"></div> <!-- Add your background image container here -->
+<main class="container py-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="sidebar" style="margin-right: 0px; color: black;"> <!-- Add right margin and black color -->
+                <h1 style="font-size: 24px;">WELCOME</h1>
+                <h2 style="font-size: 24px;">HOME</h2>
+                <h3 style="font-size: 24px;"></h3>
+                <li><a href="/messages" class="btn btn-primary btn-sm btn-block" style="margin-bottom: 10px;">Messages</a></li>
+                <li><a href="/support" class="btn btn-primary btn-sm btn-block" style="margin-bottom: 10px;">Tech Support</a></li>
+                <li><a href="/faq" class="btn btn-warning btn-sm btn-block" style="margin-bottom: 10px;">How it Works</a></li>
+            </div>
+        </div>
+
+<main class="container py-5 text-center">
+    {% block main %}{% endblock %}
+</main>
+
+<nav class="bottom-nav text-center" style="height: 70px;">
+    <div class="background-image"></div>
+    <div class="text justify" style="color: red;">
+        <p>&copy; 2024 Anonymous Tip Off</p>
+        <p><em><small>Disclaimer: While we strive to address all reported incidents, success in addressing reported incidents is not guaranteed. We appreciate your cooperation and understanding.</small></em></p>
+    </div>
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Adapted from https://stackoverflow.com/a/10162353
+        const html = '<!DOCTYPE ' +
+        document.doctype.name +
+        (document.doctype.publicId ? ' PUBLIC "' + document.doctype.publicId + '"' : '') +
+        (!document.doctype.publicId && document.doctype.systemId ? ' SYSTEM' : '') +
+        (document.doctype.systemId ? ' "' + document.doctype.systemId + '"' : '') +
+        '>\n' + document.documentElement.outerHTML;
+        
+    });
+</script>
+
+</body>
+</html>

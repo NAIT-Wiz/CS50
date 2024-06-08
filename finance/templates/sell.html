@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell Stocks
+{% endblock %}
+
+{% block main %}
+<main class="container py-5 text-center">
+    <h2>Sell Stocks</h2>
+    {% if get_flashed_messages() %}
+        <div class="alert alert-primary" role="alert">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+    {% endif %}
+    <form action="/sell" method="post">
+        <div class="d-flex justify-content-center">
+            <div class="mb-3">
+                <select id="symbol" autofocus name="symbol" class="form-select form-select-md" style="width: 180px;">
+                    <option value="" disabled selected>Symbol</option>
+                    {% for stock in user_stocks %}
+                        <option value="{{ stock.symbol }}">{{ stock.symbol }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="mb-3">
+                <input type="number" autofocus id="shares" name="shares" class="form-control form-control-md" min="1" placeholder="Shares" style="width: 180px;">
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-md">Sell</button>
+            </div>
+        </div>
+    </form>
+</main>
+{% endblock %}

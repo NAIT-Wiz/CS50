@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h1>Search Results</h1>
+
+    <form style="margin-left: 100px;"action="/search" method="GET">
+        <div class="mb-3">
+            <label for="keywords" class="form-label">Keywords:</label>
+            <input type="text" class="form-control" id="keywords" name="keywords" placeholder="Enter keywords">
+        </div>
+        <div class="mb-3">
+            <label for="status" class="form-label">Status:</label>
+            <input type="text" class="form-control" id="status" name="status" placeholder="Enter status">
+        </div>
+        <div class="mb-3">
+            <label for="assigned_to" class="form-label">Assigned To:</label>
+            <input type="text" class="form-control" id="assigned_to" name="assigned_to" placeholder="Enter assigned to">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <ul>
+        {% for report in reports %}
+            <li>Report ID: {{ report.id }} - Category: {{ report.category }} - Description: {{ report.description }}</li>
+            <!-- Add more details as needed -->
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

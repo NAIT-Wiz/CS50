@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Welcome to A T O
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+    <!-- Welcome message -->
+    <header class="mt-5 text-center" style="color: green">
+        <h1></h1>
+    </header>
+
+   <!-- Warning message -->
+    <div class="alert alert-warning" role="alert">
+        <span class="text-warning">&#9888;</span>
+        <strong>WARNING: This platform may not be used to report or call in emergencies. For emergencies, contact 111 or visit the nearest station.</strong>
+    </div>
+</div>
+    <!-- Lead class content -->
+    <div class="text-center" <strong></strong>
+        <p class="lead">This form is used to report crimes and submit tip offs regarding criminal activities.</p>
+        <p class="lead">Be specific when providing information.</p>
+        <p class="lead">Submit your information only once.</p>
+        <p class="lead">Report incidents anonymously and help keep our community safe.</p>
+    </div>
+
+    <!-- Additional content -->
+    <div class="section text-center">
+        <div class="row justify-content-center">
+            <div class="col-md-6 mb-3">
+                <a href="/incident_report" class="btn btn-danger btn-lg btn-block" style="margin-bottom: 10px;">Submit Electronic Form</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 mb-3">
+                <a href="/faq" class="btn btn-primary btn-lg btn-block">How it Works</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

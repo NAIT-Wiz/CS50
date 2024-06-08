@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Welcome to A T O
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+    <!-- Welcome message -->
+    <header class="mt-5 text-center" style="color: green">
+        <h1>Welcome to A T O</h1>
+    </header>
+        <!-- Flash messages -->
+        {% if get_flashed_messages() %}
+        <div class="alert alert-primary" role="alert">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+        {% endif %}
+
+
+    <div class="container">
+        <h1>Dashboard</h1>
+
+        <!-- Filtering Options -->
+        <form action="/dashboard" method="GET">
+            <table style="margin-left: 200px;">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Time</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th colspan="2"></th>
+                        <th>Action</th>
+                        <th>Opened</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for report in reports %}
+                    <tr>
+                        <td>{{ report.category }}</td>
+                        <td>{{ report.timestamp }}</td>
+                        <td>{{ report.location }}</td>
+                        <td>{{ report.status }}</td>
+                        <td colspan="2"></td>
+                        <td>
+                            <a href="{{ url_for('view_report', report_id=report.id) }}" class="btn btn-primary">View</a>
+                        </td>
+                        <td>{{ 'Opened' if report.opened else 'Not Opened' }}</td>
+                    </tr>
+                    <!-- Add more spacing here if needed -->
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

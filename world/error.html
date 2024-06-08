@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Error</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="/static/styles.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="error-page">
+            <h2>Error</h2>
+            <div class="error-messages">
+                {% for message in messages %}
+                    <p>{{ Please enter valid month (1-12) and day (1-31) }}</p>
+                {% endfor %}
+            </div>
+
+            <a href="/">Go back to home page</a>
+            
+        </div>
+    </div>
+
+</body>
+</html>

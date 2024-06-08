@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Headlines
+{% endblock %}
+
+{% block main %}
+{% if get_flashed_messages() %}
+<div class="alert alert-primary" role="alert">
+    {{ get_flashed_messages() | join(" ") }}
+</div>
+{% endif %}
+<div class="container mt-5">
+    <h2>Latest Headlines and Notices</h2>
+    <div class="container" style="margin-left: 90px;">
+        <ul class="list-group"> <!-- Add list-group class for Bootstrap styling -->
+            {% for item in titles %}
+                <li class="list-group-item">
+                    <h3><a href="{{ url_for('show_article', article_id=item['id']) }}">{{ item['title'] }}</a></h3>
+                    <p>Published on: {{ item['timestamp'] }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('post_news') }}" class="btn btn-primary mt-3">Post Latest News</a> <!-- Add margin top -->
+    </div>
+</div>
+{% endblock %}
+

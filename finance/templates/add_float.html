@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Cash
+{% endblock %}
+
+{% block main %}
+<main class="container py-5 text-center">
+    <h2>Add Cash</h2>
+    <form action="/add_float" method="post">
+        <div class="d-flex justify-content-center">
+            <div class="mb-3">
+                <input type="number" id="cash" name="amount" class="form-control form-control-md" min="0" step="0.01" placeholder="Amount" style="width: 180px;">
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-md">Add Cash</button>
+            </div>
+        </div>
+    </form>
+</main>
+{% endblock %}
+

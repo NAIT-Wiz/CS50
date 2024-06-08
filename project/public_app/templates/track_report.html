@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+        Track Report
+{% endblock %}
+
+{% block main %}
+<div class="container mt-5"></div>
+    <h1>Track Report</h1>
+    <div class="container">
+    {% if report %}
+    <div>
+        <h2></h2>
+        <p><strong>Category:</strong> {{ report.category }} : {{ report.location }} : {{ report.timestamp }}</p>
+
+        <p><strong>Description:</strong></p>
+        <div class="news-content" style="white-space: pre-line;"></div>
+        <p style="text-align: justify;">{{ report.description }}</p>
+      </div>
+
+            <li><strong>Status:</strong> {{ report.status }}</li>
+                    <div class="info">
+            <p style="font-size: larger;"><strong></strong></p>
+            <ul>
+                {% for note in notes %}
+                <li class="note-item">{{ note.note }} - <span style="font-size: smaller;" text-decoration: underline;">{{ note.note_timestamp }}</span></li>
+                {% endfor %}
+            </ul>
+          </div>
+        </ul>
+        <p><a href="/">Back to Track Report</a></p>
+    {% else %}
+        <form action="/track_report" method="GET">
+            <label for="reference_number">Enter Reference Number:</label>
+            <input type="text" id="reference_number" name="reference_number" required placeholder="Reference Number">
+            <button type="submit" class="btn btn-primary">Track</button>
+        </form>
+    {% endif %}
+{% endblock %}

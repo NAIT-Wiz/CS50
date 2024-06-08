@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}Search Reports{% endblock %}
+
+{% block main %}
+<form action="{{ url_for('search_reports') }}" method="get">
+    <input type="text" id="keywords" name="query" placeholder="Search reports..." value="{{ request.args.get('query', '') }}">
+    <button type="submit">Search</button>
+</form>
+
+<div id="suggestions" class="list-group"></div>
+
+{% if reports %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Timestamp</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Reference Number</th>
+                <th>Status</th>
+                <th>Assigned To</th>
+                <th>Processed By</th>
+                <th>Priority</th>
+                <th>Attachments</th>
+                <th>Photos</th>
+                <th>Anonymous</th>
+                <th>Opened</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in reports %}
+                <tr>
+                    <td>{{ report.id }}</td>
+                    <td>{{ report.timestamp }}</td>
+                    <td>{{ report.category }}</td>
+                    <td>{{ report.description }}</td>
+                    <td>{{ report.location }}</td>
+                    <td>{{ report.reference_number }}</td>
+                    <td>{{ report.status }}</td>
+                    <td>{{ report.assigned_to }}</td>
+                    <td>{{ report.processed_by }}</td>
+                    <td>{{ report.priority }}</td>
+                    <td>{{ report.attachments }}</td>
+                    <td>{{ report.photos }}</td>
+                    <td>{{ 'Yes' if report.anonymous else 'No' }}</td>
+                    <td>{{ 'Yes' if report.opened else 'No' }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No reports found.</p>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const keywordsInput = document.getElementById('keywords');
+    const suggestionsBox = document.getElementById('suggestions');
+
+    keywordsInput.addEventListener('input', function() {
+        const query = keywordsInput.value;
+        if (query.length > 1) {
+            fetch(`/live_search?query=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    suggestionsBox.innerHTML = '';
+                    data.forEach(item => {
+                        const suggestionItem = document.createElement('a');
+                        suggestionItem.href = `/reports/${item.id}`;
+                        suggestionItem.classList.add('list-group-item', 'list-group-item-action');
+                        suggestionItem.textContent = item.reference_number;
+                        suggestionsBox.appendChild(suggestionItem);
+                    });
+                });
+        } else {
+            suggestionsBox.innerHTML = '';
+        }
+    });
+});
+</script>
+{% endblock %}

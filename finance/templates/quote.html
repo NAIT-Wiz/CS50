@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  GET Quote
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h2 class="text-center">Get Quote</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-2">
+            <form id="quoteForm" method="POST" class="mb-3">
+                <div class="mb-4">
+                    <label for="symbol" class="form-label"> </label>
+                    <input type="text" autofocus class="form-control text-center" id="symbol" name="symbol" placeholder="Symbol">
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="getQuote()">Quote</button>
+            </form>
+        </div>
+    </div>
+    <div id="quotedStock"></div>
+</div>
+{% endblock %}

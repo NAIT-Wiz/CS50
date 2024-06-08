@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Notes
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h1>Add Notes</h1>
+        <!-- Add form for adding notes -->
+        <form action="/report/{{ report_id }}/add_notes" method="POST">
+            <div class="mb-3">
+                <label for="notes" class="form-label">Notes</label>
+                <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Enter notes"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Notes</button>
+        </form>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+{% endblock %}
+
